@@ -1,0 +1,7 @@
+---
+Name: constraints_config
+---
+Injector:
+  "SilverStripeAustralia\Constraints\Extensions\ConstraintsExtension":
+    properties:
+      injector: %$Injector
