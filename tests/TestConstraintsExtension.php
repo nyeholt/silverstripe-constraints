@@ -82,4 +82,22 @@ class TestConstraintsExtension extends SapphireTest {
 		
 		$config->update('Page', 'extensions', $cur);
 	}
+	
+	
+	public function testRegexConstraint() {
+		$constraint = new SilverStripeAustralia\Constraints\Constraints\RegexConstraint("Some text");
+		$constraint->setOption('regex', '^([a-z0-9]+)$');
+		$constraint->setOption('modifiers', 'i');
+		
+		$this->assertFalse($constraint->holds());
+		
+		$constraint->setOption('regex', '^([a-z0-9 \@\(\)\*\/\:\.\,\&-]+)$');
+		$this->assertTrue($constraint->holds());
+		
+		$constraint->setValue("Some text, with:all. char* () cont@ined & -others.");
+		$this->assertTrue($constraint->holds());
+		
+		$constraint->setValue("Some text, with; other [ dodgy _ char } <>");
+		$this->assertFalse($constraint->holds());
+	}
 }

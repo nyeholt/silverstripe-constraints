@@ -55,6 +55,17 @@ class Constraint {
 	}
 	
 	/**
+	 * Set an option
+	 * 
+	 * @param string $name
+	 * @param mixed $value
+	 */
+	public function setOption($name, $value) {
+		$this->options[$name] = $value;
+		return $this;
+	}
+	
+	/**
 	 * Does this constraint hold up for the current state of $this->object ?
 	 * 
 	 * @return boolean
@@ -69,7 +80,20 @@ class Constraint {
 	 * @return string
 	 */
 	public function message() {
-		return get_class($this) . ' is invalid';
+		return sprintf(_t('Constraints.DEFAULT_MESSAGE', "%s is invalid"), $this->fieldLabel());
+	}
+	
+	/**
+	 * Get the label for the field this constraint is bound to
+	 * 
+	 * @return string
+	 */
+	public function fieldLabel() {
+		$label = is_string($this->field) ? $this->field : get_class($this);
+		if ($this->object instanceof \DataObject) {
+			$label = $this->object->fieldLabel($this->field);
+		} 
+		return $label;
 	}
 	
 	/**
@@ -90,7 +114,7 @@ class Constraint {
 			}
 		}
 	}
-	
+
 	/**
 	 * Set the value being tested
 	 * 
