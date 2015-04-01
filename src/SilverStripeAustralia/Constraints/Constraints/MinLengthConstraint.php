@@ -24,7 +24,7 @@ class MinLengthConstraint extends Constraint {
 	public function message() {
 		$item = $this->fieldLabel();
 		$length = $this->opt('length', 0);
-		$message = $this->opt('message', _t('Constraints.MIN_LENGTH', "%s must be at least than %s characters long"));
+		$message = $this->opt('message', _t('Constraints.MIN_LENGTH', "%s must be at least %s characters long"));
 		return sprintf($message, $item, $length);
 	}
 	
