@@ -1,0 +1,18 @@
+{
+	"name": "silverstripe-australia/silverstripe-constraints",
+	"description": "Define constraints on data objects that are evaluated before writing, rather than form level validators",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "data objects", "validation", "constraints"],
+	"license": "BSD-3-Clause",
+	"authors": [
+	{
+		"name": "Marcus Nyeholt",
+		"email": "marcus@silverstripe.com.au"
+	}
+	],
+	"require":
+	{
+		"silverstripe/framework": "~3.1"
+
+	}
+}
