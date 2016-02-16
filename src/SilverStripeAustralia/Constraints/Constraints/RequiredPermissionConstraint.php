@@ -5,7 +5,7 @@ namespace SilverStripeAustralia\Constraints\Constraints;
 use SilverStripeAustralia\Constraints\Constraint;
 
 /**
- * 
+ *
  * Used when a user must have a specific permission to be allowed to edit a specific
  * field.
  *
@@ -21,11 +21,11 @@ class RequiredPermissionConstraint extends Constraint {
 		$object = $this->object;
 		if ($object instanceof \DataObject) {
 			$changed = $this->object->isChanged($this->field, 2);
-			
+
 			if ($changed) {
 				return \Permission::check($perm);
 			}
-		} 
+		}
 		return true;
 	}
 }

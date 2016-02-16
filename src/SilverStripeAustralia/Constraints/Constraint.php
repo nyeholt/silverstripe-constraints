@@ -9,35 +9,35 @@ namespace SilverStripeAustralia\Constraints;
  * @license BSD License http://www.silverstripe.org/bsd-license
  */
 class Constraint {
-	
+
 	/**
 	 * The field / key this constraint is applied to
 	 *
 	 * @var string
 	 */
 	protected $field;
-	
+
 	/**
-	 * The object or array this should be applied to. 
-	 * 
+	 * The object or array this should be applied to.
+	 *
 	 * @var mixed
 	 */
 	protected $object;
-	
+
 	/**
 	 * In some cases, the constraint may be applied directly to a value
 	 *
 	 * @var mixed
 	 */
 	protected $value;
-	
+
 	/**
 	 * Options for the constraints
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $options;
-	
+
 	public function __construct($appliedTo, $field = null, $options = null) {
 		// if only provided a value and optional options
 		if (count(func_get_args()) <= 2) {
@@ -49,14 +49,14 @@ class Constraint {
 			$this->options = $options;
 		}
 	}
-	
+
 	protected function opt($name, $default = null) {
 		return ($this->options && isset($this->options[$name])) ? $this->options[$name] : $default;
 	}
-	
+
 	/**
 	 * Set an option
-	 * 
+	 *
 	 * @param string $name
 	 * @param mixed $value
 	 */
@@ -64,41 +64,41 @@ class Constraint {
 		$this->options[$name] = $value;
 		return $this;
 	}
-	
+
 	/**
 	 * Does this constraint hold up for the current state of $this->object ?
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public function holds() {
 		return false;
 	}
-	
+
 	/**
 	 * Get the message for when this constraint doesn't hold up
-	 * 
+	 *
 	 * @return string
 	 */
 	public function message() {
 		return sprintf(_t('Constraints.DEFAULT_MESSAGE', "%s is invalid"), $this->fieldLabel());
 	}
-	
+
 	/**
 	 * Get the label for the field this constraint is bound to
-	 * 
+	 *
 	 * @return string
 	 */
 	public function fieldLabel() {
 		$label = is_string($this->field) ? $this->field : get_class($this);
 		if ($this->object instanceof \DataObject) {
 			$label = $this->object->fieldLabel($this->field);
-		} 
+		}
 		return $label;
 	}
-	
+
 	/**
 	 * Gets the value this constraint is testing
-	 * 
+	 *
 	 * @return mixed
 	 */
 	public function getValue() {
@@ -117,7 +117,7 @@ class Constraint {
 
 	/**
 	 * Set the value being tested
-	 * 
+	 *
 	 * @param mixed $value
 	 * @return \SilverStripeAustralia\Constraints\Constraint
 	 */
