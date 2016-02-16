@@ -7,17 +7,17 @@ namespace SilverStripeAustralia\Constraints\Extensions;
  * @license BSD License http://www.silverstripe.org/bsd-license
  */
 class ConstraintsExtension extends \DataExtension {
-	
+
 	/**
 	 *
 	 * @var Injector
 	 */
 	public $injector;
-	
+
 	public function validate(\ValidationResult $validationResult) {
-		
+
 		$constraints = $this->getConstraints();
-		
+
 		foreach ($constraints as $constraint) {
 			if (!$constraint->holds()) {
 				$validationResult->error($constraint->message());
@@ -28,9 +28,9 @@ class ConstraintsExtension extends \DataExtension {
 	public function getConstraints() {
 		// evaluate any configured constraints
 		$constraints = $this->owner->config()->get('constraints');
-		
+
 		$allConstraints = array();
-		
+
 		if (count($constraints)) {
 			foreach ($constraints as $fieldName => $info) {
 				// if we've only given one constraint, it'll be a string, so make it an array
@@ -51,9 +51,9 @@ class ConstraintsExtension extends \DataExtension {
 					if (!class_exists($constraintClass)) {
 						$constraintClass = 'SilverStripeAustralia\\Constraints\Constraints\\' . $constraintClass;
 					}
-					
+
 					$constraint = $this->injector->create($constraintClass, $this->owner, $fieldName, $config);
-					
+
 					$allConstraints[] = $constraint;
 				}
 			}

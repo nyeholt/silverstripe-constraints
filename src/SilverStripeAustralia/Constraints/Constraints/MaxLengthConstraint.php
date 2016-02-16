@@ -6,20 +6,20 @@ use SilverStripeAustralia\Constraints\Constraint;
 
 /**
  * Ensure a field is less than a certain number of characters long
- * 
+ *
  * @author <marcus@silverstripe.com.au>
  * @license BSD License http://www.silverstripe.org/bsd-license
  */
 class MaxLengthConstraint extends Constraint {
 	public function holds() {
 		$length = $this->opt('length', 0);
-		
-		// do we convert newlines to single characters for counting? 
+
+		// do we convert newlines to single characters for counting?
 		$convertNewlines = $this->opt('convertnewlines', 1);
 		$val = $convertNewlines ? str_replace("\r\n", "\n", $this->getValue()) : $this->getValue();
-		
+
 		$l = mb_strlen($val, 'utf-8');
-		
+
 		return $l <= $length;
 	}
 
